@@ -27,7 +27,6 @@ public class AudioHolder : MonoBehaviour
         if (s == null)
             return;
         // s.source.Play();
-        Debug.Log(s.name);
         
     }
 }

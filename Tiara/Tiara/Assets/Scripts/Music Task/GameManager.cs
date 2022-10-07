@@ -8,26 +8,35 @@ using Random = System.Random;
 
 public enum PlayerCoOperators
 {
-    Ghost,
     BlackPea
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    [HideInInspector] public List<NoteLogic> userInputNotes = new List<NoteLogic>();
-    [HideInInspector] public List<string> playerNotes = new List<string>();//the available notes that we have to check
-    List<string> finallNotes = new List<string>();//the given notes that player has to play
-
+    
     [SerializeField] private List<string> notesSounds = new List<string>();//the sound of each note do re mi fa sol la si
     [SerializeField] private float delayBetweenSounds;
     [SerializeField] private int notesCount;//the number of notes that player has to play
-    public Text status;//a simple text to show the notes 
-    private PlayerCoOperators _coOperators = PlayerCoOperators.Ghost;//the player co op which is ghost or black pea
-
-    public List<BoxCollider2D> doorColliders = new List<BoxCollider2D>();//here is for the ability to add delay between selecting door by simply disabling the box collider so we can't select the door
     [SerializeField] private float delayTimeBetweenDoors;//the delay time between selecting each door
+    [SerializeField] private float nokhodDelayBtwDoors;
+    [SerializeField] private List<int> noteCountPerLevel = new List<int>();
+    public int legalMistakes = 3;
+    public List<BoxCollider2D> doorColliders = new List<BoxCollider2D>();//here is for the ability to add delay between selecting door by simply disabling the box collider so we can't select the door
+    
+    
+    [HideInInspector] public List<NoteLogic> userInputNotes = new List<NoteLogic>();
+    [HideInInspector] public List<string> playerNotes = new List<string>();//the available notes that we have to check
+    
+    
+    private List<string> finallNotes = new List<string>();//the given notes that player has to play
+    private List<string> finallNotesReversed;
+    private PlayerCoOperators _coOperators = PlayerCoOperators.BlackPea;//the player co op which is ghost or black pea
+    private bool _canChoose = true;
 
+    private int _mistakesCount;
+
+    
     private void Awake()
     {
         Instance = this;
@@ -35,16 +44,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         CreateNotes();
     }
 
     public void OnChooseDoor()
     {
-        StartCoroutine(AbilityToChooseDoor());
+        StartCoroutine(AbilityToChooseDoor(_canChoose));
     }
 
-    IEnumerator AbilityToChooseDoor()//delay between selecting doors
+    private IEnumerator AbilityToChooseDoor(bool canChoose)//delay between selecting doors
     {
+        if (canChoose == false)
+        {
+            yield return null;
+        }
         foreach (var doorCollider in doorColliders)
         {
             doorCollider.enabled = false;
@@ -59,36 +73,77 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void CreateNotes()//generates the notes that the player has to play
+    private void CreateNotes()//generates the notes that the player has to play
     {
-        status.text = "Notes :";
-
-        Random coRand = new Random();
-        _coOperators = (PlayerCoOperators)coRand.Next(0, Enum.GetNames(typeof(PlayerCoOperators)).Length);
+        _mistakesCount = 0;
+        _coOperators = PlayerCoOperators.BlackPea;
+        notesCount = noteCountPerLevel[PlayerPrefs.GetInt("NotePerLevel", 0)];
 
         Random rand = new Random();
-        for (int i = 0; i < notesCount; i++)
+        string finalNote = "";
+
+        int i = 0;
+        while (i<notesCount)
         {
             int index = rand.Next(0, notesSounds.Count);
+            if (finallNotes.Contains(notesSounds[index]))
+            {
+                continue;
+            }
+            i++;
             finallNotes.Add(notesSounds[index]);
-            status.text += notesSounds[index];
+            finalNote += notesSounds[index];
+           
+        }
+        // for (int i = 0; i < notesCount; i++)
+        // {
+        //     int index = rand.Next(0, notesSounds.Count);
+        //     finallNotes.Add(notesSounds[index]);
+        //     finalNote += notesSounds[index];
+        // }
+
+        finallNotes.Reverse();
+        finallNotesReversed = new List<string>(finallNotes);
+        finallNotes.Reverse();
+
+        StartCoroutine(MoveNokhod());
+        Debug.Log($"Try : {finalNote}");
+    }
+
+    private IEnumerator MoveNokhod()
+    {
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = false;
+        }
+        for (int i = 0; i < finallNotesReversed.Count; i++)
+        {
+            yield return new WaitForSeconds(nokhodDelayBtwDoors);
+            var door = doorColliders.Find(o => o.gameObject.GetComponent<NoteLogic>().name == finallNotes[i]).gameObject.GetComponent<NoteLogic>();
+            FindObjectOfType<NokhodAI>().Move(door,Vector3.zero);
+        }
+        yield return new WaitForSeconds(nokhodDelayBtwDoors);
+        FindObjectOfType<NokhodAI>().Move(null,FindObjectOfType<NokhodAI>().nokhodStandingPlace.position);
+        
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = true;
         }
     }
 
     bool CheckForCorrectNote()//checks that the input note is correct or not if it is returns true else false
     {
-        print(nameof(CheckForCorrectNote));
         for (int i = 0; i < playerNotes.Count; i++)
         {
-            if (playerNotes[i] != finallNotes[i])
+            if (playerNotes[i] != finallNotesReversed[i])
             {
                 return false;
             }
         }
 
-        if (playerNotes.Count == finallNotes.Count)
+        if (playerNotes.Count == finallNotesReversed.Count)
         {
-            Win();
+            StartCoroutine(Win());
         }
 
         return true;
@@ -97,30 +152,72 @@ public class GameManager : MonoBehaviour
 
     public void CheckNotes()//if the note that player has entered was wrong then we call the Lost function
     {
-        print(nameof(CheckNotes));
-
+        _mistakesCount++;
         if (CheckForCorrectNote())
         {
             return;
         }
 
-        Lost();
+        if (_mistakesCount <= legalMistakes)
+        {
+            Debug.Log("Try Again ");
+            playerNotes.Remove(playerNotes[playerNotes.Count - 1]);
+            return;
+        }
+        StartCoroutine(Lost());
     }
 
-    private void Lost()//anything after loosing the game
+    private IEnumerator Lost()//anything after loosing the game
     {
-        status.text = "You Lost The Game";
+        Debug.Log("Lost");
+        _canChoose = false;
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = false;
+        }
+        yield return new WaitForSeconds(1);
+        foreach (var doorCollider in doorColliders)
+        {
+            var door = doorCollider.gameObject.GetComponent<NoteLogic>();
+            door._anim.SetTrigger(door.DoorClose);
+            door._doorState = DoorState.Close;
+        }
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = true;
+        }
+
+        _canChoose = true;
         playerNotes.Clear();
         finallNotes.Clear();
         CreateNotes();
+        
     }
 
-    private void Win()//everything after winning the game
+    private IEnumerator Win()//everything after winning the game
     {
-        status.text = "You Won The Game";
+        Debug.Log("Win");
+
+        _canChoose = false;
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = false;
+        }
+        yield return new WaitForSeconds(1);
+        foreach (var doorCollider in doorColliders)
+        {
+            var door = doorCollider.gameObject.GetComponent<NoteLogic>();
+            door._anim.SetTrigger(door.DoorClose);
+            door._doorState = DoorState.Close;
+        }
+        foreach (var doorCollider in doorColliders)
+        {
+            doorCollider.enabled = true;
+        }
         StartCoroutine(PlayNotes(_coOperators));
         playerNotes.Clear();
         finallNotes.Clear();
+        PlayerPrefs.SetInt("NotePerLevel",PlayerPrefs.GetInt("NotePerLevel") + 1);
         CreateNotes();
     }
 
