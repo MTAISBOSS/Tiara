@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        PlayerPrefs.SetInt("NotePerLevel",0);
     }
 
     private void Start()
@@ -95,13 +96,7 @@ public class GameManager : MonoBehaviour
             finalNote += notesSounds[index];
            
         }
-        // for (int i = 0; i < notesCount; i++)
-        // {
-        //     int index = rand.Next(0, notesSounds.Count);
-        //     finallNotes.Add(notesSounds[index]);
-        //     finalNote += notesSounds[index];
-        // }
-
+        
         finallNotes.Reverse();
         finallNotesReversed = new List<string>(finallNotes);
         finallNotes.Reverse();

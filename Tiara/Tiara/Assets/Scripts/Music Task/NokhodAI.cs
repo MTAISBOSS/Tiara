@@ -14,7 +14,7 @@ public class NokhodAI : MonoBehaviour
 
     private void Start()
     {
-        // _anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
     }
 
     public void Move(NoteLogic noteLogic, Vector3 standingPos)
@@ -29,10 +29,6 @@ public class NokhodAI : MonoBehaviour
             target = standingPos;
         }
 
-
-        Debug.Log($"X:{target.x} , Y:{target.y} , Z:{target.z}");
-        var distance = Vector3.Distance(transform.position, target);
-        // speed = distance / speed;
         if (target.x > transform.position.x)
         {
             transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -59,14 +55,11 @@ public class NokhodAI : MonoBehaviour
 
     private void RunAnim()
     {
-        Debug.Log("IsRunning");
-        // _anim.SetTrigger(IsRunning);
+        _anim.SetBool(IsRunning,true);
     }
 
     private void IdelAnim()
     {
-        Debug.Log("IsIdel");
-
-        // _anim.SetTrigger(IsIdel);
+        _anim.SetBool(IsRunning,false);
     }
 }

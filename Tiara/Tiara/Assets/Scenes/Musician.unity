@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 1942317341}
   - component: {fileID: 1942317340}
   - component: {fileID: 1942317339}
+  - component: {fileID: 1942317342}
   m_Layer: 0
   m_Name: Nokhod
   m_TagString: Untagged
@@ -1388,6 +1389,25 @@ Transform:
   m_Father: {fileID: 2037576982}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1942317342
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942317338}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e05971be909674f47854596765287dc0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1989527908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3863571069036440552, guid: e88714d8d7728d340b8d673ae49fe733,
