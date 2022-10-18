@@ -40,7 +40,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White_Door_Closing
+  m_Name: Door_Closing
   m_Speed: -1
   m_CycleOffset: 0
   m_Transitions:
@@ -54,7 +54,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 26581a48c4ddc3840bb615c52691ccac, type: 2}
+  m_Motion: {fileID: 7400000, guid: b5395614961c3ab42b45b0383ac8651e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -67,7 +67,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White_Door_Open
+  m_Name: Door_Open
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -80,7 +80,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 26581a48c4ddc3840bb615c52691ccac, type: 2}
+  m_Motion: {fileID: 7400000, guid: b5395614961c3ab42b45b0383ac8651e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -107,7 +107,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 389cb34e53aaa7542b4ce710b6567bff, type: 2}
+  m_Motion: {fileID: 7400000, guid: d24d55ded2201874bad08c3354e34924, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -169,7 +169,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White Door
+  m_Name: Purple Door
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: DoorClose
@@ -210,7 +210,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White_Door_Default
+  m_Name: Door_Default
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -223,7 +223,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 389cb34e53aaa7542b4ce710b6567bff, type: 2}
+  m_Motion: {fileID: 7400000, guid: d24d55ded2201874bad08c3354e34924, type: 2}
   m_Tag: Default
   m_SpeedParameter: 
   m_MirrorParameter: 
