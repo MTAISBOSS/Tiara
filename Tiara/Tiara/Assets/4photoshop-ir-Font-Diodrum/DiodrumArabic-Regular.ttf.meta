@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 04f5ab12b90262c49b2ee54ddeadd0c6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DiodrumArabic-Regular
+  fontNames:
+  - DiodrumArabic-Regular
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 127d0818e9be9d74b97b73f2bdf9ab4d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 0b32b7486711ca141b962bfbc72f859c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DiodrumArabic-Semibold
+  fontNames:
+  - DiodrumArabic-Semibold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 88e09fc380e5e254d94fc8afbe34ee95, type: 3}
+  - {fileID: 12800000, guid: e03fcefdf249f5844a1fbc123b097652, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

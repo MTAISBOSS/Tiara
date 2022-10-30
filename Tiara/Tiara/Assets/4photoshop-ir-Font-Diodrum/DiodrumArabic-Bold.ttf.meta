@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: ec2914fc072fe1d48bd0e9c10cf3287f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DiodrumArabic-Bold
+  fontNames:
+  - DiodrumArabic-Bold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bb9f9a46732105444ac7bec34b2f5382, type: 3}
+  - {fileID: 12800000, guid: 165a056b06424ef4d8e0904bcb7e87b1, type: 3}
+  - {fileID: 12800000, guid: 48b2c80d952056147ad3889d9a161a31, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

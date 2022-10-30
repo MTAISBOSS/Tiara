@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 951f093ff8a01a540b227afa2c2e8810
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DiodrumArabic-Extralight
+  fontNames:
+  - DiodrumArabic-Extralight
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 9369cba570050174ba6d475e9957f2f5, type: 3}
+  - {fileID: 12800000, guid: 7eba853c660df6d408f3356fff809a2b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
