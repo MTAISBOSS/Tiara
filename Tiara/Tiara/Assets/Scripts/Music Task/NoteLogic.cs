@@ -29,6 +29,8 @@ public class NoteLogic : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         _anim = GetComponent<Animator>();
     }
+    
+    
 
     private void OnMouseDown()
     {
