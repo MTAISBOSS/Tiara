@@ -236,11 +236,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelInfos:
   - level: 0
-    spawnSpeed: 5
-    numberOfSpawns: 2
-    distanceToDecoys: 1
+    spawnSpeed: 3
+    numberOfSpawns: 3
+    distanceToDecoys: 5
+    timeOfDisappearing: 2
+    timeOfAppearing: 1
+  - level: 1
+    spawnSpeed: 2
+    numberOfSpawns: 4
+    distanceToDecoys: 6
     timeOfDisappearing: 1
     timeOfAppearing: 1
+  _sprites:
+  - {fileID: 21300000, guid: ada598b27f7691c44862a6efcd3f5b28, type: 3}
+  - {fileID: 21300000, guid: 4754d64ebd0aa32489e455d09a01cb78, type: 3}
+  - {fileID: 21300000, guid: 41fbc7bbaee1c2e45af22e9dc1956624, type: 3}
+  - {fileID: 21300000, guid: d3aeefa30d89d124eba7bcb0893e4b50, type: 3}
+  - {fileID: 21300000, guid: 83ac3f8ddd1b06040b37eb3b344d9ac2, type: 3}
+  _level: 0
 --- !u!4 &1480854147
 Transform:
   m_ObjectHideFlags: 0

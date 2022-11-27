@@ -2,16 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class MirrorGates : MonoBehaviour
 {
+    public static MirrorGates Instance;
     [SerializeField] private List<LevelInfo> _levelInfos = new List<LevelInfo>();
+    [SerializeField] private List<Sprite> _sprites = new List<Sprite>();
     public static List<PeaLogic> _peaGameObjects = new List<PeaLogic>();
 
-    private int _level;
+    [HideInInspector]public int _level;
     private float _spawnSpeed;
     private int _numberOfSpawns;
     private float _timeOfAppearing;
@@ -19,36 +22,54 @@ public class MirrorGates : MonoBehaviour
     private float _timeOfDisappearing;
     private float _timeBetweenSpawn;
     private bool _isOnStart;
+    private int currentSpawnNumber;
+
     private void Awake()
     {
+        Instance = this;
         _level = 0;
-        
         Initialize();
-        
     }
-
-    private void Update()
+    
+    private void LateUpdate()
     {
         SpawnManager();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
+        if (_level >= _levelInfos.Count)
+        {
+            Debug.Log("Levels Are Empty");
+            return;
+        }
         var currentLevelInfo = _levelInfos[_level];
         _spawnSpeed = currentLevelInfo.spawnSpeed;
         _numberOfSpawns = currentLevelInfo.numberOfSpawns;
         _timeOfAppearing = currentLevelInfo.timeOfAppearing;
-        _distanceToDecoys = currentLevelInfo.distanceToDecoys;
-        _timeOfDisappearing = currentLevelInfo.timeOfDisappearing;
-        
+        _timeOfDisappearing = (_numberOfSpawns*_spawnSpeed) + currentLevelInfo.timeOfDisappearing;
+
         _timeBetweenSpawn = _spawnSpeed;
         _isOnStart = true;
+        currentSpawnNumber = 0;
+        Invoke(nameof(StopAllActions), _timeOfDisappearing);
+    }
 
-
+    private void StopAllActions()
+    {
+        foreach (var peaGameObject in _peaGameObjects)
+        {
+            peaGameObject.StopAllActions();
+        }
     }
 
     private void SpawnManager()
     {
+        if (currentSpawnNumber >= _numberOfSpawns)
+        {
+            return;
+        }
+
         if (_timeBetweenSpawn > 0)
         {
             _timeBetweenSpawn -= Time.deltaTime;
@@ -56,34 +77,41 @@ public class MirrorGates : MonoBehaviour
         else
         {
             _timeBetweenSpawn = _spawnSpeed;
+            currentSpawnNumber++;
 
-            
-                Spawn(transform);
-            
-            foreach (var p in _peaGameObjects.ToList())
+            if (_peaGameObjects.Count == 0)
             {
-                Spawn(p.transform);
+                Spawn(transform);
             }
-            
+            else
+            {
+                foreach (var p in _peaGameObjects.ToList())
+                {
+                    Spawn(p.transform);
+                }
+            }
         }
     }
 
     private void Spawn(Transform _transform)
     {
-        for (int i = 0; i < _numberOfSpawns; i++)
+        int index;
+        index = _peaGameObjects.Count == 0 ? 1 : 2;
+
+        for (int i = 0; i < index; i++)
         {
-            _distanceToDecoys *= -1;
             PeaLogic p = ObjectPool.Instance.GetPooledGameObject().GetComponent<PeaLogic>();
 
             if (p != null)
             {
-                p.distanceToDecoys = _distanceToDecoys;
-                p.timeOfAppearing = _timeOfAppearing;
-                p.timeOfDisappearing = _timeOfDisappearing;
-                p.transform.position = _transform.position;
                 p.transform.parent = transform;
-                p.speed = Random.Range(0.5f, 1.5f);
+                p.transform.position = _transform.position;
+                p.maxDistanceToMainPea = _distanceToDecoys;
+                p.speed = Random.Range(1f, 1.5f);
+                p.GetComponent<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Count)];
                 p.gameObject.SetActive(true);
+                p.transform.DOScale(0, 0);
+                p.transform.DOScale(1, _timeOfAppearing);
                 _peaGameObjects.Add(p);
             }
         }
@@ -91,9 +119,12 @@ public class MirrorGates : MonoBehaviour
         if (_isOnStart)
         {
             _peaGameObjects[0].isMainPea = true;
+            _isOnStart = false;
+
         }
-        _isOnStart = false;
+
     }
+    
 }
 
 [System.Serializable]

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3190844142866590337}
   - component: {fileID: 8588119737228845326}
   - component: {fileID: 8739591372121201302}
+  - component: {fileID: -1037465117139355476}
   m_Layer: 0
   m_Name: pea
   m_TagString: Untagged
@@ -93,7 +94,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -111,10 +112,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeff7ab0ae879641ac92f2d90ef49e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedOfWave: 1
-  maxDistance: 5
+  OnStopSprite: {fileID: 21300000, guid: 2e750718895291247b0e366a04af264c, type: 3}
+  xLim: 5
+  yLim: 5
+  moveAnim: 4
+  maxDistanceToParent: 20
   speed: 0.5
-  distanceToDecoys: 0
-  timeOfAppearing: 0
-  timeOfDisappearing: 5
   rate: 0
+  isMainPea: 0
+--- !u!50 &-1037465117139355476
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722529082512358212}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
