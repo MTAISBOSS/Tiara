@@ -13,10 +13,13 @@ public class ScoreManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerScoreManager.OnDecreaseScore += DrawScoreItems;
+        PlayerScoreManager.OnIncreaseScore += DrawScoreItems;
+
     }
     private void OnDisable()
     {
         PlayerScoreManager.OnDecreaseScore -= DrawScoreItems;
+        PlayerScoreManager.OnIncreaseScore -= DrawScoreItems;
     }
 
     private void Start()

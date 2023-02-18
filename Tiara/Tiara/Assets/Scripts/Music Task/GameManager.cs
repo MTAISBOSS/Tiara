@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     private bool _canChoose = true;
 
     private int _mistakesCount;
-
+    private int currentState = 0;
     
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        currentState = 0;
         CreateNotes();
     }
 
@@ -192,7 +193,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator Win()//everything after winning the game
     {
         Debug.Log("Win");
+        PlayerScoreManager.Instance.IncreaseScore(2);
 
+        currentState++;
+
+        if (currentState >= noteCountPerLevel.Count)
+        {
+            Debug.Log("Level Finished");
+            SceneManager.LoadScene("Main");
+        }
         _canChoose = false;
         foreach (var doorCollider in doorColliders)
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetInt("Level", 1);
         int currentLevel = PlayerPrefs.GetInt("Level", 0);
         //levels start from 1 , so zero means we haven't unlocked first level yet
         for (int i = 0; i < levelItems.Count; i++)
@@ -34,7 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void LoadLevel(int levelIndex)
     {
-        //load level
-        Debug.Log($"Level {levelIndex} Loaded");
+        SceneManager.LoadScene(levelIndex);
     }
+    
 }

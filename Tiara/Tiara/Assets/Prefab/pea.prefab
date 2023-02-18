@@ -112,12 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeff7ab0ae879641ac92f2d90ef49e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStopSprite: {fileID: 21300000, guid: 2e750718895291247b0e366a04af264c, type: 3}
-  xLim: 5
-  yLim: 5
+  OnStopSprite: {fileID: 21300000, guid: a283eb527370f614fb0384946e910fb8, type: 3}
+  xLim: 8
+  yLim: 8
   moveAnim: 4
-  maxDistanceToParent: 20
   speed: 0.5
+  maxDistanceToMainPea: 0
   rate: 0
   isMainPea: 0
 --- !u!50 &-1037465117139355476

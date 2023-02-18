@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullScore: {fileID: 451620299651209253, guid: 6952d49a2f0f8e34e8bf8e3b29ecf646,
     type: 3}
-  halfScore: {fileID: 451620299651209253, guid: 6952d49a2f0f8e34e8bf8e3b29ecf646,
+  halfScore: {fileID: 4538511926393379503, guid: 3c974653d07599741a7388b23852ff47,
     type: 3}
   emptyScore: {fileID: 3372196204438821313, guid: 0584fb8e9abb56a4a949dca20f347a9e,
     type: 3}

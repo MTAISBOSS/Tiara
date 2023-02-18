@@ -14,6 +14,7 @@ public class WordGameManager : MonoBehaviour
     
     [SerializeField] private Text resultText;
     public List<string> wordsToCheck = new List<string>();
+    public WordContainerData[] wordContainerDatas ;
 
     private string _result;
     private int _index;
@@ -21,6 +22,7 @@ public class WordGameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        wordContainerDatas = new WordContainerData[wordsToCheck.Count];
         ResetChar();
     }
     private void Update()
@@ -58,8 +60,23 @@ public class WordGameManager : MonoBehaviour
     {
         if (WordIsValid())
         {
+            foreach (var data in wordContainerDatas)
+            {
+                if (data.word.Equals(wordsToCheck[_index]))
+                {
+                    foreach (var o in data.wordContainers)
+                    {
+                        o.SetActive(true);
+                    }
+                }
+            }
             wordsToCheck.RemoveAt(_index);
             _index = 0;
+        }
+
+        if (wordsToCheck.Count<=0 )
+        {
+            Debug.Log("Win");
         }
     }
     private bool WordIsValid()
@@ -81,4 +98,11 @@ public class WordData
 {
     public string letter;
     public int id;
+}
+
+[Serializable]
+public class WordContainerData
+{
+    public string word;
+    public List<GameObject> wordContainers = new List<GameObject>();
 }

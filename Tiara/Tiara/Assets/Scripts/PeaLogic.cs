@@ -37,6 +37,7 @@ public class PeaLogic : MonoBehaviour
     private void Move()
     {
         var pos = PickRandomPosition(xLim, yLim);
+        Rotate(pos);
         transform.DOMove(pos, speed).SetEase(moveAnim).OnComplete(() =>
         {
             if (_canMove)
@@ -55,11 +56,19 @@ public class PeaLogic : MonoBehaviour
                     else
                     {
                         pos = PickRandomPosition(xLim, yLim);
+                        Rotate(pos);
                         Move();
                     }
                 }
             }
         });
+    }
+
+    private void Rotate(Vector3 vector3)
+    {
+        var dir = vector3 - transform.position;
+        dir = dir.normalized;
+        transform.eulerAngles = new Vector3(0, 0, dir.z);
     }
 
     private Vector3 PickRandomPosition(float xLimit, float yLimit)
@@ -77,15 +86,21 @@ public class PeaLogic : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log(isMainPea ? "Correct" : "Wrong");
-        
+
+        if (isMainPea)
+        {
+            PlayerScoreManager.Instance.IncreaseScore(2);
+        }
+      
 
         MirrorGates.Instance._level++;
         foreach (var peaGameObject in MirrorGates._peaGameObjects)
         {
             peaGameObject.Disable();
         }
+
         MirrorGates._peaGameObjects.Clear();
-        
+
         MirrorGates.Instance.Initialize();
     }
 

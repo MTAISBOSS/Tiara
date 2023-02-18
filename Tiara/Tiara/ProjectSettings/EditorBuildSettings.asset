@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Mirror Gate.unity
+    guid: 73320747e4c47054d8ec3d98f0d9195a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Musician.unity
+    guid: 57503f8a982182c4f86036f0e5f0f202
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Word.unity
+    guid: 644b5826df1d6044b959a36b499a8707
+  - enabled: 1
+    path: Assets/Scenes/Mirror Gate.unity
+    guid: dea058d609563c4418e75047ee956964
+  - enabled: 1
+    path: Assets/Scenes/Musician.unity
+    guid: e2e96c25b79348b45bbd91d44117f624
+  - enabled: 1
+    path: Assets/Scenes/Word.unity
+    guid: ed29e255dbf1d4942ac1c25ad7d2f138
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 4237d12f8fbde9744b85ebef49da8e2e
   m_configObjects: {}

@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// attach this script to game manager
 public class PlayerScoreManager : MonoBehaviour
 {
-   
+   public static PlayerScoreManager Instance;
+
    public static Action OnIncreaseScore;
    public static Action OnDecreaseScore;
-   public static PlayerScoreManager Instance;
 
    public int maxScore = 20;
    public int currentScore;
@@ -19,18 +19,18 @@ public class PlayerScoreManager : MonoBehaviour
 
    private void Start()
    {
-      currentScore = 0;
+      currentScore = maxScore/2;
    }
 
-   void DecreaseScore()
+   public void DecreaseScore(int amount)
    {
+      currentScore-=amount;
       OnDecreaseScore?.Invoke();
-      currentScore--;
    }
 
-   void IncreaseScore()
+   public void IncreaseScore(int amount)
    {
+      currentScore+=amount;
       OnIncreaseScore?.Invoke();
-      currentScore++;
    }
 }
